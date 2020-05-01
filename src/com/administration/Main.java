@@ -10,12 +10,9 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        Scanner scanner=new Scanner(System.in);
-        Student stu1= new Student("juliva smith", 2018);
-        stu1.printAvailableCourses();
+        Student stu1= new Student();
         System.out.println("Add your courses for this semester");
-        stu1.addCourses(scanner.next());
-        scanner.nextLine();
+        stu1.enroll();
         System.out.println(stu1.toString());
 //        File f=new File("courses.txt");
 //        System.out.println(f.getAbsolutePath());
