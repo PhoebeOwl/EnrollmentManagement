@@ -34,12 +34,16 @@ public class Student {
 
             while (scanner.hasNextLine()){
                 String course = scanner.nextLine();
-                coursesAvailable.add(course);
+                coursesAvailable.add(course.toLowerCase());
             }
         }catch(IOException e){
             e.printStackTrace();
         }
 
+    }
+    public String getBasicInfo(){
+        return "Name: "+name+'\''+
+                ", ID: "+ID;
     }
     public String generateID(){
         int firstDigit= grade;
@@ -61,24 +65,29 @@ public class Student {
         printAvailableCourses();
         do{
             System.out.println("enter course name (Q = quit): ");
-            String course=in.next();
-            in.nextLine();
+            String course=in.nextLine().toLowerCase();
             if(coursesAvailable.contains(course)) {
                 coursesEnrolled.add(course);
                 tuition += costPerCourse;
                 balance -= costPerCourse;
-            }else if(course.equals("Q")){
+            }else if(course.equals("q")){
                 break;
             }else{
                 System.out.println("course not available to you");
             }
         }while(true);
     }
-    public void payTuition(int payment){
+    public void payTuition(){
+        Scanner in=new Scanner(System.in);
+        System.out.println("enter your payment: $");
+        int payment = in.nextInt();
+        in.nextLine();
         balance +=payment;
+        System.out.println("Thank you for your payment");
+        viewBalance();
     }
-    public int getBalance(){
-        return balance;
+    public void viewBalance(){
+        System.out.println("Your balance is: $"+balance);
     }
 
     @Override
@@ -86,9 +95,9 @@ public class Student {
         return "Student{" +
                 "name='" + name + '\'' +
                 ", ID='" + ID + '\'' +
-                ", tuition=" + tuition +'\''+
-                ", balance=" + getBalance() +'\''+
-                ", coursesEnrolled=" + coursesEnrolled +
+                ", tuition= '$" + tuition +'\''+
+                 ", balance= '$"+balance+'\''+
+                ", coursesEnrolled= '" + coursesEnrolled +
                 '}';
     }
 }
